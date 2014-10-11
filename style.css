@@ -1,0 +1,56 @@
+
+div.feedback_link
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
+div.feedback_form
+{
+	display: none;
+	position: relative;
+	top: 10px;
+	left: 0px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 20px;
+	text-align: center;
+}
+#feedback_form_form input
+{
+	border: 1px solid black;
+	border-radius: 3px;
+}
+#feedback_form_form textarea
+{
+	border: 1px solid black;
+	border-radius: 3px;
+}
+div.feedback_form_close
+{
+	text-align: right;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+div.feedback_form_close span
+{
+	text-decoration: none;
+	cursor: pointer;
+}
+p.feedback_form_error
+{
+	display: block;
+	color: red;
+	font-weight: bold;
+}
+p.feedback_form_error_hidden
+{
+	display: none;
+}
+p.feedback_form_ok
+{
+	display: block;
+	color: green;
+	font-weight: bold;
+}
+
+
