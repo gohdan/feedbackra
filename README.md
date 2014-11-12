@@ -14,20 +14,22 @@ Feedbackra is feedback sender.
 
 4. Include JS creation script on your page like this:
 
-<script src="/feedbackra/javascript.php?form=sample" type="text/javascript"></script>
+<script src="/feedbackra/javascript.php?form=sample&form_id=1" type="text/javascript"></script>
+
+1 is form id - useful if you have to place more than one form on a page.
 
 To use form sliding in and out you also have to use jQuery (not included here). Don't forget to change "sample" on your own form name!
 
 5. Include styles containing in style.css. You can include it in your CSS files or place directly on the page in <STYLE> tag just like this:
 <STYLE> ... contents of style.css ... </STYLE>
 
-6. Place from from sample.html to your page. Customize it. Look at the IDs: there are three types like:
+6. Place from from sample.html to your page. Customize it. Look at the IDs: there are types like:
 
-* feedback_form_phone: id of the input field
-* feedback_form_error_phone: will be shown if 'phone' is important field and is empty;
-* feedback_form_send_button: will be hidden when message will be successfully sent;
-* feedback_form_response_ok: will be shown if message will be successfully sent;
-* feedback_form_response_error: will be shown if message will not be successfully sent;
-* feedback_form_response: will be shown if message will not be successfully sent.
+* feedback_form_1_phone: id of the input field
+* feedback_form_1_error_phone: will be shown if 'phone' is important field and is empty;
+* feedback_form_1_send_button: will be hidden when message will be successfully sent;
+* feedback_form_1_response_ok: will be shown if message will be successfully sent;
+* feedback_form_1_response_error: will be shown if message will not be successfully sent;
+* feedback_form_1_response: will be shown if message will not be successfully sent.
 
-
+(1 is form id)

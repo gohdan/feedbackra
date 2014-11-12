@@ -2,14 +2,14 @@
 
 echo <<<END
 
-function show_feedback_form()
+function show_feedback_form(form_id)
 {
-	$('#feedback_form').show('slow');
+	$('#feedback_form_' + form_id).show('slow');
 }
 
-function hide_feedback_form()
+function hide_feedback_form(form_id)
 {
-	$('#feedback_form').hide('slow');
+	$('#feedback_form_' + form_id).hide('slow');
 }
 
 END;
