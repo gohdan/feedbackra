@@ -40,7 +40,8 @@ if (file_exists($config_file))
 	$mail->Host = $config['mail']['host']; // specify main and backup server
 	$mail->Port = $config['mail']['port'];
 	$mail->SMTPAuth = true; // turn on SMTP authentication
-	$mail->SMTPSecure = 'ssl'; // Enable SSL encryption, `tls` also accepted
+	if ("yes" == $config['mail']['ssl'])
+		$mail->SMTPSecure = 'ssl'; // Enable SSL encryption, `tls` also accepted
 	$mail->Username = $config['mail']['username']; // SMTP username
 	$mail->Password = $config['mail']['password']; // SMTP password
 

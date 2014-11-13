@@ -13,10 +13,13 @@ $config['important_fields'] = array(
 );
 
 $config['mail'] = array(
-	'admin_email' => "admin@example.org",
-	'to' => "director@example.org",
+	'admin_email' => 'admin@example.org',
+	'to' => array(
+		'director@example.org'
+	),
 	'host' => 'smtp.example.org',
 	'port' => 465,
+	'ssl' => 'yes',
 	'username' => 'forms@example.org',
 	'password' => '********',
 	'from' => 'forms@example.org',
