@@ -23,7 +23,9 @@ To use form sliding in and out you also have to use jQuery (not included here). 
 5. Include styles containing in style.css. You can include it in your CSS files or place directly on the page in <STYLE> tag just like this:
 <STYLE> ... contents of style.css ... </STYLE>
 
-6. Place from from sample.html to your page. Customize it. Look at the IDs: there are types like:
+You'll need at least styles feedback_form_error, feedback_form_error_hidden, feedback_form_ok. Don't rename it, javascript will try to set them on the elements on the page.
+
+6. Place form from sample.html to your page. Customize it. Look at the IDs, there are types like:
 
 * feedback_form_1_phone: id of the input field
 * feedback_form_1_error_phone: will be shown if 'phone' is important field and is empty;
@@ -33,3 +35,5 @@ To use form sliding in and out you also have to use jQuery (not included here). 
 * feedback_form_1_response: will be shown if message will not be successfully sent.
 
 (1 is form id)
+
+

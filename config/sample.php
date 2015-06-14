@@ -13,7 +13,9 @@ $config['important_fields'] = array(
 );
 
 $config['mail'] = array(
+	'direct' => 'no', // set to "yes" to send mail directly with mail() function
 	'admin_email' => 'admin@example.org',
+	'bcc_admin' => 'yes', // set to "no" to don't send copy of the emails to admin
 	'to' => array(
 		'director@example.org'
 	),
@@ -24,8 +26,7 @@ $config['mail'] = array(
 	'password' => '********',
 	'from' => 'forms@example.org',
 	'from_name' => 'Feedback Form',
-	'subject' => 'Feedback from your website',
-	'bcc_admin' => 'yes' // set to "no" to don't send copy of the emails to admin
+	'subject' => 'Feedback from your website'
 );
 
 ?>
