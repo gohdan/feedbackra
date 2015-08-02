@@ -1,12 +1,15 @@
 <?php
 
+$function_name = "send_feedback_".$config['form'];
+
+echo ("function ".$function_name."()");
 echo <<<END
-
-
-function send_feedback(form_id)
 {
 	var if_debug = 0;
-	if (if_debug) console.log("=== send_feedback ===");
+END;
+echo ("var form_id = '".$config['form']."';");
+echo ("if (if_debug) console.log(\"=== ".$function_name." ===\");");
+echo <<<END
 	if (if_debug) console.log("form_id: " + form_id);
 	var if_error = 0;
 
@@ -80,15 +83,17 @@ echo <<<END
 		}
 END;
 
-echo ("		httpRequest.onreadystatechange = function() { alertContents(httpRequest, form_id); };");
+echo ("		httpRequest.onreadystatechange = function() { alertContents_".$config['form']."(httpRequest, form_id); };");
 
 echo <<<END
 		httpRequest.open('GET', url, true);
 		httpRequest.send('');
 	}
+END;
 
-if (if_debug) console.log("=== end: send_feedback ===");
+echo ("if (if_debug) console.log(\"=== end: ".$function_name." ===\");");
 
+echo <<<END
 }
 
 END;

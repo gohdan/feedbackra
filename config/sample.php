@@ -12,6 +12,13 @@ $config['important_fields'] = array(
 	'message'
 );
 
+$config['seo'] = array(
+	'yandex_metrica_uid' => '',
+	'yandex_metrica_action' => '',
+	'google_analytics_category' => '',
+	'google_analytics_action' => ''
+);
+
 $config['mail'] = array(
 	'direct' => 'no', // set to "yes" to send mail directly with mail() function
 	'admin_email' => 'admin@example.org',

@@ -14,11 +14,13 @@ Feedbackra is feedback sender.
 
 4. Include JS creation script on your page like this:
 
-<script src="/feedbackra/javascript.php?form=sample&form_id=1" type="text/javascript"></script>
+<script src="/feedbackra/javascript.php?form=sample" type="text/javascript"></script>
 
-1 is form id - useful if you have to place more than one form on a page.
+Don't forget to change "sample" on your own form name!
 
-To use form sliding in and out you also have to use jQuery (not included here). Don't forget to change "sample" on your own form name!
+To place more than one form on a page, give them different names (instead of "sample") and different config files.
+
+To use form sliding in and out you also have to use jQuery (not included here, you can find it on https://jquery.com).
 
 5. Include styles containing in style.css. You can include it in your CSS files or place directly on the page in <STYLE> tag just like this:
 <STYLE> ... contents of style.css ... </STYLE>
