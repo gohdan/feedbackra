@@ -29,13 +29,11 @@ You'll need at least styles feedback_form_error, feedback_form_error_hidden, fee
 
 6. Place form from sample.html to your page. Customize it. Look at the IDs, there are types like:
 
-* feedback_form_1_phone: id of the input field
-* feedback_form_1_error_phone: will be shown if 'phone' is important field and is empty;
-* feedback_form_1_send_button: will be hidden when message will be successfully sent;
-* feedback_form_1_response_ok: will be shown if message will be successfully sent;
-* feedback_form_1_response_error: will be shown if message will not be successfully sent;
-* feedback_form_1_response: will be shown if message will not be successfully sent.
-
-(1 is form id)
+* feedback_form_sample_phone: id of the input field
+* feedback_form_sample_error_phone: will be shown if 'phone' is important field and is empty;
+* feedback_form_sample_send_button: will be hidden when message will be successfully sent;
+* feedback_form_sample_response_ok: will be shown if message will be successfully sent;
+* feedback_form_sample_response_error: will be shown if message will not be successfully sent;
+* feedback_form_sample_response: will be shown if message will not be successfully sent.
 
 
