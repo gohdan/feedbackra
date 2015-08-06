@@ -2,6 +2,8 @@
 
 $config['form'] = "sample"; // so there must be the config file config/sample.php - it will be automatically loaded by name
 
+$config['use_jquery'] = "no"; // set to "yes" to use jquery animation
+
 $config['fields'] = array(
 	'Contact phone' => 'phone',
 	'Feedback message' => 'message'

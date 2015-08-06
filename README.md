@@ -36,4 +36,4 @@ You'll need at least styles feedback_form_error, feedback_form_error_hidden, fee
 * feedback_form_sample_response_error: will be shown if message will not be successfully sent;
 * feedback_form_sample_response: will be shown if message will not be successfully sent.
 
-
+You can look at the example at http://feedbackra.gohdan.ru
