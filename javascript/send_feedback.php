@@ -22,20 +22,41 @@ echo ("var el_id = '';\n");
 
 foreach($config['important_fields'] as $k => $v)
 {
-	echo ("if (if_debug) console.log('checking param ' + ".$v.");\n");
-	echo ("el_id='feedback_form_' + form_id + '_error_".$v."';\n");
-	echo ("if (if_debug) console.log('el_id: ' + el_id);\n");
-	echo ("if ('' == ".$v.")\n");
-	echo ("{\n");
-		echo ("if (if_debug) console.log('".$v." is empty');\n");
-		echo ("if_error = 1;\n");
-		echo ("document.getElementById(el_id).className='feedback_form_error';\n");
-	echo ("}\n");
-	echo ("else\n");
-	echo ("{\n");
-		echo ("if (if_debug) console.log('".$v." is not empty');\n");
-		echo ("document.getElementById(el_id).className='feedback_form_error_hidden';\n");
-	echo ("}\n");
+	if ("yes" == $config['show_error_messages'])
+	{
+		echo ("if (if_debug) console.log('checking param ' + ".$v.");\n");
+		echo ("el_error_id='feedback_form_' + form_id + '_error_".$v."';\n");
+		echo ("if (if_debug) console.log('el_error_id: ' + el_error_id);\n");
+		echo ("if ('' == ".$v.")\n");
+		echo ("{\n");
+			echo ("if (if_debug) console.log('".$v." is empty');\n");
+			echo ("if_error = 1;\n");
+			echo ("document.getElementById(el_error_id).className='feedback_form_error';\n");
+		echo ("}\n");
+		echo ("else\n");
+		echo ("{\n");
+			echo ("if (if_debug) console.log('".$v." is not empty');\n");
+			echo ("document.getElementById(el_error_id).className='feedback_form_error_hidden';\n");
+		echo ("}\n");
+	}
+
+
+	if ("yes" == $config['change_input_class_on_error'])
+	{
+		echo ("el_id='feedback_form_' + form_id + '_".$v."';\n");
+		echo ("if (if_debug) console.log('el_id: ' + el_id);\n");
+		echo ("if ('' == ".$v.")\n");
+		echo ("{\n");
+			echo ("if (if_debug) console.log('".$v." is empty');\n");
+			echo ("if_error = 1;\n");
+			echo ("document.getElementById(el_id).className='".$config['important_fields_error_class']."';\n");
+		echo ("}\n");
+		echo ("else\n");
+		echo ("{\n");
+			echo ("if (if_debug) console.log('".$v." is not empty');\n");
+			echo ("document.getElementById(el_id).className='".$config['important_fields_normal_class']."';\n");
+		echo ("}\n");
+	}
 
 }
 

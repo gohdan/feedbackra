@@ -53,4 +53,13 @@ p.feedback_form_ok
 	font-weight: bold;
 }
 
+input.feedback_form_input
+{
+	border: 1px solid black;
+	width: 300px;
+}
 
+input.feedback_form_input_error
+{
+	border: 1px solid red;
+}

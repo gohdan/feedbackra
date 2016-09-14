@@ -14,6 +14,11 @@ $config['important_fields'] = array(
 	'message'
 );
 
+$config['show_error_messages'] = "yes";
+$config['change_input_class_on_error'] = "yes";
+$config['important_fields_normal_class'] = "feedback_form_input";
+$config['important_fields_error_class'] = "feedback_form_input_error"; // set class that will be assigned to input field if it's empty
+
 $config['seo'] = array(
 	'yandex_metrica_uid' => '',
 	'yandex_metrica_action' => '',
