@@ -34,10 +34,15 @@ if (file_exists($config_file))
 
 	if ("yes" == $config['mail']['direct'])
 	{
-		$headers = "Content-type: text/plain; charset=utf-8\r\n";
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/plain; charset=utf-8\r\n";
+		$headers .= "Content-Transfer-Encoding: 8bit \r\n";
+
 		if ("" != $config['mail']['from_name'])
 			$headers .= "From: ".$config['mail']['from_name']." <".$config['mail']['from'].">\r\n";
+			//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from_name'])." <".$config['mail']['from'].">\r\n";
 		else
+			//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from'])."\r\n";
 			$headers .= "From: ".$config['mail']['from']."\r\n";
 		if ("yes" == $config['mail']['bcc_admin'])
 			$headers .= "Bcc: ".$config['mail']['admin_email']."\r\n";
@@ -56,6 +61,7 @@ if (file_exists($config_file))
 
 		if ("yes" == $config['mail']['send_user'])
 			mail($_GET['email'], $subject, $message, $headers);
+
 	}
 	else
 	{
@@ -96,7 +102,7 @@ if (file_exists($config_file))
 
 		if ("yes" == $config['mail']['send_user'])
 		{
-			$mailer->ClearAddresses();
+			$mail->clearAddresses();
 			$mail->AddAddress($_GET['email']);
 			$mail->Send();
 		}
