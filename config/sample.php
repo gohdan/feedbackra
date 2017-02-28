@@ -30,6 +30,7 @@ $config['mail'] = array(
 	'direct' => 'no', // set to "yes" to send mail directly with mail() function
 	'admin_email' => 'admin@example.org',
 	'bcc_admin' => 'yes', // set to "no" to don't send copy of the emails to admin
+	'send_user' => 'no', // set to "yes" to send copy of email to user
 	'to' => array(
 		'director@example.org'
 	),

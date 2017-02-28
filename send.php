@@ -53,6 +53,9 @@ if (file_exists($config_file))
 			$result = 1;
 		else
 			$error = "mail sending error";
+
+		if ("yes" == $config['mail']['send_user'])
+			mail($_GET['email'], $subject, $message, $headers);
 	}
 	else
 	{
@@ -90,6 +93,13 @@ if (file_exists($config_file))
 			$result = 1;
 		else
 			$error = $mail->ErrorInfo;
+
+		if ("yes" == $config['mail']['send_user'])
+		{
+			$mailer->ClearAddresses();
+			$mail->AddAddress($_GET['email']);
+			$mail->Send();
+		}
 	}
 
 	if ($result)
