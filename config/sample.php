@@ -14,6 +14,7 @@ $config['important_fields'] = array(
 	'message'
 );
 
+$config['check_fields_before_send'] = "yes";
 $config['show_error_messages'] = "yes";
 $config['change_input_class_on_error'] = "yes";
 $config['important_fields_normal_class'] = "feedback_form_input";

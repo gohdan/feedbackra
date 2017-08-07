@@ -19,100 +19,104 @@ if (file_exists($config_file))
 	$fields = array();
 	$message = "";
 	$result =0;
+	$if_send = 1;
 
-	foreach($config['fields'] as $field_title => $field_name)
+	foreach ($config['important_fields'] as $k => $v)
+	if (!isset($_GET[$v]) || ("" == $_GET[$v]))
+		$if_send = 0;
+
+	if ($if_send)
 	{
-		//echo ($field_title.":".$field_name);
-		if (isset($_GET[$field_name]))
+		foreach($config['fields'] as $field_title => $field_name)
 		{
-			$message .= $field_title.": ".$_GET[$field_name]."\r\n\r\n";
+			//echo ($field_title.":".$field_name);
+			if (isset($_GET[$field_name]))
+				$message .= $field_title.": ".$_GET[$field_name]."\r\n\r\n";
 		}
-	}
-	//echo ("message: ".$message);
+		//echo ("message: ".$message);
 
-	$subject = '=?utf-8?B?'.base64_encode($config['mail']['subject']).'?=';
+		$subject = '=?utf-8?B?'.base64_encode($config['mail']['subject']).'?=';
 
-	if ("yes" == $config['mail']['direct'])
-	{
-		$headers = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/plain; charset=utf-8\r\n";
-		$headers .= "Content-Transfer-Encoding: 8bit \r\n";
+		if ("yes" == $config['mail']['direct'])
+		{
+			$headers = "MIME-Version: 1.0\r\n";
+			$headers .= "Content-type: text/plain; charset=utf-8\r\n";
+			$headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
-		if ("" != $config['mail']['from_name'])
-			$headers .= "From: ".$config['mail']['from_name']." <".$config['mail']['from'].">\r\n";
-			//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from_name'])." <".$config['mail']['from'].">\r\n";
+			if ("" != $config['mail']['from_name'])
+				$headers .= "From: ".$config['mail']['from_name']." <".$config['mail']['from'].">\r\n";
+				//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from_name'])." <".$config['mail']['from'].">\r\n";
+			else
+				//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from'])."\r\n";
+				$headers .= "From: ".$config['mail']['from']."\r\n";
+			if ("yes" == $config['mail']['bcc_admin'])
+				$headers .= "Bcc: ".$config['mail']['admin_email']."\r\n";
+
+			$to = "";
+			foreach ($config['mail']['to'] as $k => $v)
+				$to .= $v.", ";
+			rtrim($to, ", ");
+
+			$message = wordwrap($message, 70, "\r\n");
+
+			if (mail($to, $subject, $message, $headers))
+				$result = 1;
+			else
+				$error = "mail sending error";
+
+			if ("yes" == $config['mail']['send_user'])
+				mail($_GET['email'], $subject, $message, $headers);
+		}
 		else
-			//$headers .= "From: =?utf-8?B?".base64_encode($config['mail']['from'])."\r\n";
-			$headers .= "From: ".$config['mail']['from']."\r\n";
-		if ("yes" == $config['mail']['bcc_admin'])
-			$headers .= "Bcc: ".$config['mail']['admin_email']."\r\n";
+		{
+			include_once ("./phpmailer/PHPMailerAutoload.php");
 
-		$to = "";
-		foreach ($config['mail']['to'] as $k => $v)
-			$to .= $v.", ";
-		rtrim($to, ", ");
+			$mail = new PHPMailer();
 
-		$message = wordwrap($message, 70, "\r\n");
+			$mail->setLanguage('ru');
+			$mail->CharSet = "utf-8";
+			$mail->IsSMTP(); // set mailer to use SMTP
+			$mail->Host = $config['mail']['host']; // specify main and backup server
+			$mail->Port = $config['mail']['port'];
+			$mail->SMTPAuth = true; // turn on SMTP authentication
+			if ("yes" == $config['mail']['ssl'])
+				$mail->SMTPSecure = 'ssl'; // Enable SSL encryption, `tls` also accepted
+			$mail->Username = $config['mail']['username']; // SMTP username
+			$mail->Password = $config['mail']['password']; // SMTP password
 
-		if (mail($to, $subject, $message, $headers))
-			$result = 1;
-		else
-			$error = "mail sending error";
-
-		if ("yes" == $config['mail']['send_user'])
-			mail($_GET['email'], $subject, $message, $headers);
-
-	}
-	else
-	{
-		include_once ("./phpmailer/PHPMailerAutoload.php");
-
-		$mail = new PHPMailer();
-
-		$mail->setLanguage('ru');
-		$mail->CharSet = "utf-8";
-		$mail->IsSMTP(); // set mailer to use SMTP
-		$mail->Host = $config['mail']['host']; // specify main and backup server
-		$mail->Port = $config['mail']['port'];
-		$mail->SMTPAuth = true; // turn on SMTP authentication
-		if ("yes" == $config['mail']['ssl'])
-			$mail->SMTPSecure = 'ssl'; // Enable SSL encryption, `tls` also accepted
-		$mail->Username = $config['mail']['username']; // SMTP username
-		$mail->Password = $config['mail']['password']; // SMTP password
-
-		$mail->From = $config['mail']['from'];
-		$mail->FromName = $config['mail']['from_name'];
+			$mail->From = $config['mail']['from'];
+			$mail->FromName = $config['mail']['from_name'];
 	
-		foreach($config['mail']['to'] as $k => $v)
-			$mail->AddAddress($v);
+			foreach($config['mail']['to'] as $k => $v)
+				$mail->AddAddress($v);
 
-		if ("yes" == $config['mail']['bcc_admin'])
-			$mail->addBCC($config['mail']['admin_email']);
+			if ("yes" == $config['mail']['bcc_admin'])
+				$mail->addBCC($config['mail']['admin_email']);
 
-		$mail->WordWrap = 70;                                 // set word wrap to 50 characters
-		$mail->IsHTML(false);                                  // set email format to HTML
+			$mail->WordWrap = 70;                                 // set word wrap to 50 characters
+			$mail->IsHTML(false);                                  // set email format to HTML
 
-		$mail->Subject = $subject;
-		$mail->Body = $message;
+			$mail->Subject = $subject;
+			$mail->Body = $message;
 
-		if($mail->Send())
-			$result = 1;
-		else
-			$error = $mail->ErrorInfo;
+			if($mail->Send())
+				$result = 1;
+			else
+				$error = $mail->ErrorInfo;
 
-		if ("yes" == $config['mail']['send_user'])
-		{
-			$mail->clearAddresses();
-			$mail->AddAddress($_GET['email']);
-			$mail->Send();
+			if ("yes" == $config['mail']['send_user'])
+			{
+				$mail->clearAddresses();
+				$mail->AddAddress($_GET['email']);
+				$mail->Send();
+			}
 		}
+
+		if ($result)
+			echo ("ok");
+		else
+			echo ($error);
 	}
-
-	if ($result)
-		echo ("ok");
-	else
-		echo ($error);
-
 }
 }
 
