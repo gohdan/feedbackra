@@ -14,6 +14,16 @@ $config['important_fields'] = array(
 	'message'
 );
 
+$config['important_fields_min_length'] = array(
+	'phone' => '0',
+	'message' => '0'
+);
+
+$config['important_fields_min_number_length'] = array(
+	'phone' => '0',
+	'message' => '0'
+);
+
 $config['check_fields_before_send'] = "yes";
 $config['show_error_messages'] = "yes";
 $config['change_input_class_on_error'] = "yes";

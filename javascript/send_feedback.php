@@ -26,36 +26,28 @@ if ("yes" == $config['check_fields_before_send'])
 		if ("yes" == $config['show_error_messages'])
 		{
 			echo ("if (if_debug) console.log('checking param ' + ".$v.");\n");
+			echo ("el_id='feedback_form_' + form_id + '_".$v."';\n");
 			echo ("el_error_id='feedback_form_' + form_id + '_error_".$v."';\n");
+			echo ("if (if_debug) console.log('el_id: ' + el_id);\n");
 			echo ("if (if_debug) console.log('el_error_id: ' + el_error_id);\n");
-			echo ("if ('' == ".$v.")\n");
+			echo ("if (if_debug) console.log('field length: ' + ".$v.".length);\n");
+			echo ("field_number = ".$v.".replace(/\D+/g,'');\n");
+			echo ("if (if_debug) console.log('field_number: ' + field_number);\n");
+			echo ("if (if_debug) console.log('field_number length: ' + field_number.length);\n");
+			echo ("if ('' == ".$v." || (".$v.".length < ".$config['important_fields_min_length'][$v].") || (field_number.length < ".$config['important_fields_min_number_length'][$v]."))\n");
 			echo ("{\n");
-				echo ("if (if_debug) console.log('".$v." is empty');\n");
+				echo ("if (if_debug) console.log('".$v." is empty or too short');\n");
 				echo ("if_error = 1;\n");
 				echo ("document.getElementById(el_error_id).className='feedback_form_error';\n");
+				if ("yes" == $config['change_input_class_on_error'])
+					echo ("document.getElementById(el_id).className='".$config['important_fields_error_class']."';\n");
 			echo ("}\n");
 			echo ("else\n");
 			echo ("{\n");
-				echo ("if (if_debug) console.log('".$v." is not empty');\n");
+				echo ("if (if_debug) console.log('".$v." is not empty and long enough');\n");
 				echo ("document.getElementById(el_error_id).className='feedback_form_error_hidden';\n");
-			echo ("}\n");
-		}
-
-
-		if ("yes" == $config['change_input_class_on_error'])
-		{
-			echo ("el_id='feedback_form_' + form_id + '_".$v."';\n");
-			echo ("if (if_debug) console.log('el_id: ' + el_id);\n");
-			echo ("if ('' == ".$v.")\n");
-			echo ("{\n");
-				echo ("if (if_debug) console.log('".$v." is empty');\n");
-				echo ("if_error = 1;\n");
-				echo ("document.getElementById(el_id).className='".$config['important_fields_error_class']."';\n");
-			echo ("}\n");
-			echo ("else\n");
-			echo ("{\n");
-				echo ("if (if_debug) console.log('".$v." is not empty');\n");
-				echo ("document.getElementById(el_id).className='".$config['important_fields_normal_class']."';\n");
+				if ("yes" == $config['change_input_class_on_error'])
+					echo ("document.getElementById(el_id).className='".$config['important_fields_normal_class']."';\n");
 			echo ("}\n");
 		}
 	}
